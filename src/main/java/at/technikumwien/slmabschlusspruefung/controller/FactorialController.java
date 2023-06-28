@@ -6,9 +6,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FactorialController {
+    private int sum = 0;
     @RequestMapping("/api/factorial")
     public int getFactorial(@RequestParam int number){
-        return calculateFactorial(number);
+        int result = calculateFactorial(number);
+        sum = sum + result;
+        return result;
     }
 
     private int calculateFactorial(int number){
@@ -18,5 +21,8 @@ public class FactorialController {
             return 1;
         }
     }
-
+    @RequestMapping("/api/factorial/total")
+    public int getTotalFactorial(){
+        return sum;
+    }
 }
